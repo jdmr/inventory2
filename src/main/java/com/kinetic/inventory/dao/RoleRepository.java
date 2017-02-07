@@ -23,16 +23,13 @@
  */
 package com.kinetic.inventory.dao;
 
-import com.kinetic.inventory.model.Product;
-import java.util.List;
-import org.springframework.data.domain.Pageable;
+import com.kinetic.inventory.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author J. David Mendoza <jdmendoza@swau.edu>
  */
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface RoleRepository extends JpaRepository<Role, String> {
     
-    public List<Product> findByManufacturerIgnoreCaseContainingOrModelIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(String manufacturer, String model, String description, Pageable pageable);
 }

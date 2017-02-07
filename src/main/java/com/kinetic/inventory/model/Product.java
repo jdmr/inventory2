@@ -39,7 +39,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 // Defines table with the name 'products'
 @Table(name = "products")
-public class Products implements Serializable {
+public class Product implements Serializable {
 
     // Will be the unique id generated for this object
     @Id
@@ -76,11 +76,11 @@ public class Products implements Serializable {
     private BigDecimal listPrice;
 
     // Default constructor
-    public Products() {
+    public Product() {
     }
 
     // Parameterized constructor
-    public Products(Long id, String manufacturer, String model,
+    public Product(Long id, String manufacturer, String model,
             String description, BigDecimal listPrice) {
         this.id = id;
         this.manufacturer = manufacturer;

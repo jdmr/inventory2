@@ -21,17 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.kinetic.inventory;
+package com.kinetic.inventory.service;
 
 import com.kinetic.inventory.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author J. David Mendoza <jdmendoza@swau.edu>
  */
+@Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     // connects to the userDao class

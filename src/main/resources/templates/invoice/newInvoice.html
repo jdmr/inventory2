@@ -1,0 +1,89 @@
+<!--
+The MIT License
+
+Copyright 2013 martinezl.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <!-- header info and metadata -->
+    <head th:include='/main :: head(#{invoice.label})'>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title th:text="|${title} - #{project.name.label}|">Main</title>
+        <meta name="description" content=""/>
+        <meta name="author" content="Lorenzo Martinez"/>
+        <!-- phone compatibility -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="../../resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="../../resources/img/apple-touch-icon-precomposed.png" th:href="@{/resources/img/apple-touch-icon-precomposed.png}" />
+
+        <!-- css files -->
+        <link rel="stylesheet" href="../../resources/css/bootstrap.no-icons.min.css" th:href="@{//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css}" />
+        <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" th:href="@{//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css}" />
+        <link rel="stylesheet" href="../../resources/css/main.css" th:href="@{/resources/css/main.css}" />        
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <header class="navbar navbar-inverse navbar-fixed-top" role="banner" th:substituteby="/main :: navigation('invoice')">
+        </header>   
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>New Invoice</h1>   
+                    <!-- form to add the customer to the new invoice -->
+                    <form class="form-horizontal well" action="#" th:action="@{/invoice/create}" th:object='${invoice}' method="post">
+                        <input type="hidden" th:field="*{total}"/>
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="client" class="col-md-2 control-label"><span style="font-size:20px;">Client</span></label>
+                                <div class="col-md-10">
+                                    <select class="form-control" th:field="*{client.id}" id="client">
+                                        <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.company}">Client</option>                             
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <p style="margin-top: 10px;">
+                                    <button type="submit" name="createBtn" class="btn btn-primary" id="create" th:attr="value=#{create.invoice}" ><i class="icon-ok icon-white"></i>&nbsp;Create Invoice</button>
+                                    <a class="btn" href="/inventory/invoice"><i class="icon-remove"></i> Cancel</a>
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>   
+                </div>
+            </div></div>
+
+        <!-- javascript on the bottom of the page to load faster -->
+        <div th:include="main :: scripts">
+            <script src="../../resources/js/jquery-1.10.1.min.js" th:src="@{http://code.jquery.com/jquery-1.10.1.min.js}"></script>
+            <script src="../../resources/js/jquery-migrate-1.2.1.min.js" th:src="@{http://code.jquery.com/jquery-migrate-1.2.1.min.js}"></script>
+            <script src="../../resources/js/bootstrap.min.js" th:src="@{http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js}"></script>
+            <script src="../../resources/js/main.js" th:src="@{/resources/js/main.js}"></script>
+        </div>
+        <!-- script to have the field 'client' pre-selected as the page loads -->
+        <script>
+            $(function() {
+                $('#client').focus();
+            });
+        </script>
+    </body>
+</html>

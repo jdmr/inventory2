@@ -64,7 +64,7 @@ public class Item implements Serializable {
     
     // many items to one product relationship
     @ManyToOne
-    private Products product;
+    private Product product;
 
     // Default constructor
     public Item(){
@@ -147,14 +147,14 @@ public class Item implements Serializable {
     /**
      * @return the product
      */
-    public Products getProduct() {
+    public Product getProduct() {
         return product;
     }
 
     /**
      * @param product the product to set
      */
-    public void setProduct(Products product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
     

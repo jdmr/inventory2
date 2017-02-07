@@ -1,0 +1,116 @@
+<!--
+The MIT License
+
+Copyright 2013 martinezl.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <!--header information-->
+    <head th:include='/main :: head(#{user.label})'>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title th:text="|${title} - #{project.name.label}|">Main</title>
+        <meta name="description" content=""/>
+        <meta name="author" content="Lorenzo Martinez"/>
+        <!-- Phone compatibility -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" href="../../resources/img/favicon.ico" th:href="@{/resources/img/favicon.ico}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="../../resources/img/apple-touch-icon-precomposed.png" th:href="@{/resources/img/apple-touch-icon-precomposed.png}" />
+
+        <!-- css files -->
+        <link rel="stylesheet" href="../../resources/css/bootstrap.no-icons.min.css" th:href="@{//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css}" />
+        <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" th:href="@{//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css}" />
+        <link rel="stylesheet" href="../../resources/css/main.css" th:href="@{/resources/css/main.css}" />        
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <header class="navbar navbar-inverse navbar-fixed-top" role="banner" th:substituteby="/main :: navigation('admin/user')">
+        </header>   
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Add new User</h1>
+                    <!-- form fields -->
+                    <form class="form-horizontal well well-lg" role="form" action="#" th:action="@{/admin/user/create}" th:object='${user}' method="post">
+                        <fieldset>
+
+                            <div class="form-group">
+                                <label for="username" class="col-md-2 control-label"><span style="font-size:20px;">Enter Email</span></label>                
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" id="username" placeholder="Email" name="email" th:field="*{username}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 control-label"><span style="font-size:20px;">Password</span></label>                            
+                                <div class="col-md-10">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" th:field="*{password}"/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label for="firstName" class="col-md-2 control-label"><span style="font-size:20px;">First Name</span></label>
+                                <div class="col-md-10">        
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" th:field="*{firstName}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="col-md-2 control-label"><span style="font-size: 20px;">Last Name</span></label>
+                                <div class="col-md-10">           
+                                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" th:field="*{lastName}"/>                            
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="ROLE_ADMIN" name="roles" onclick="document.getElementById('ROLE_USER').checked = this.checked;" th:field="*{roles}" value="ROLE_ADMIN"/>
+                                        <span style="font-size: 20px;">ROLE_ADMIN</span>
+                                        <br/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="ROLE_USER"  name="roles" th:field="*{roles}" value="ROLE_USER"/>
+                                        <span style="font-size:20px;">ROLE_USER</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <p style="margin-top: 10px;">
+                                    <button type="submit" name="createBtn" class="btn btn-primary" id="create" th:attr="value=#{create.user}" ><i class="icon-ok icon-white"></i>&nbsp;Create User</button>
+                                    <a class="btn" href="/inventory/admin/user"><i class="icon-remove"></i> Cancel</a>
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>  
+                </div>
+            </div></div>
+
+        <!-- javascript on the bottom of the page to load faster -->
+        <div th:include="main :: scripts">
+            <script src="../../resources/js/jquery-1.10.1.min.js" th:src="@{http://code.jquery.com/jquery-1.10.1.min.js}"></script>
+            <script src="../../resources/js/jquery-migrate-1.2.1.min.js" th:src="@{http://code.jquery.com/jquery-migrate-1.2.1.min.js}"></script>
+            <script src="../../resources/js/bootstrap.min.js" th:src="@{http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js}"></script>
+            <script src="../../resources/js/main.js" th:src="@{/resources/js/main.js}"></script>
+        </div>
+    </body>
+</html>
